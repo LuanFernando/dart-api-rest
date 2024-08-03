@@ -1,0 +1,52 @@
+{
+    "users" :[
+        {
+            "id": 1,
+            "name": "pedro",
+            "user": "pedro@",
+            "password": "12345"
+        },
+        {
+            "id": 2,
+            "name": "maria",
+            "user": "maria@",
+            "password": "assd5"
+        },
+        {
+            "id": 3,
+            "name": "joao",
+            "user": "joao@",
+            "password": "aaa2s345"
+        },
+        {
+            "id": 4,
+            "name": "chico",
+            "user": "chico@",
+            "password": "12dsd345"
+        },
+        {
+            "id": 5,
+            "name": "filó",
+            "user": "filó@",
+            "password": "filózinha"
+        },
+        {
+            "id": 6,
+            "name": "tio zé",
+            "user": "tioze@",
+            "password": "fuscao@preto"
+        },
+        {
+            "id": 7,
+            "name": "silvana",
+            "user": "silvana@",
+            "password": "12aslfkfk5"
+        },
+        {
+            "id": 8,
+            "name": "bianca",
+            "user": "bianca@",
+            "password": "1234zzzasd5"
+        }
+    ]
+}
