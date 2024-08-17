@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import '../controller/user_controller.dart';
+import '../controller/ai_gemini_controller.dart';
 
 class ServiceRoute {
   late String _path;
@@ -81,7 +82,9 @@ class ServiceRoute {
   void _post() {
     Map<String, Function> _routerPost = {
       '/users/new': UserController.newUser,
-      '/users/auth': UserController.auth
+      '/users/auth': UserController.auth,
+      '/ai/calc': AiGeminiController.geminiCalc,
+      '/ai/chat': AiGeminiController.geminiChat,
     };
     if (_routerPost.containsKey(_route)) {
       _routerPost[_route]!(request);
