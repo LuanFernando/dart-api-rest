@@ -56,8 +56,18 @@ class AiGeminiController {
     final body = jsonEncode({
       'contents': [
         {
+          'role': 'user',
           'parts': [
             {'text': "${prompt}"}
+          ]
+        },
+        {
+          'role': 'model',
+          'parts': [
+            {
+              'text':
+                  "Sou uma calculadora avançada, especializada exclusivamente em operações matemáticas. Respondo apenas com o resultado numérico. Exemplos: 'Quanto é 5 x 3?' -> '15'; 'Qual é a raiz quadrada de 16?' -> '4'. Para qualquer pergunta que não seja matemática, responderei apenas: 'Eu não sei'."
+            }
           ]
         }
       ],
