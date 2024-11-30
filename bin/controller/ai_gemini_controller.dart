@@ -31,6 +31,23 @@ class AiGeminiController {
 
   // Chatbot Gemini
   static void geminiChat(HttpRequest request) async {
+    // Adicionando cabeçalhos CORS
+    request.response.headers
+        .add('Access-Control-Allow-Origin', '*'); // Permitir todas as origens
+    request.response.headers.add('Access-Control-Allow-Methods',
+        'GET, POST, OPTIONS'); // Métodos permitidos
+    request.response.headers.add('Access-Control-Allow-Headers',
+        'Content-Type'); // Cabeçalhos permitidos
+
+    // Verificar se a requisição é uma preflight request (OPTIONS)
+    if (request.method == 'OPTIONS') {
+      // Responder imediatamente para requisições OPTIONS
+      request.response
+        ..statusCode = HttpStatus.ok
+        ..close();
+      return;
+    }
+
     final content = await utf8.decoder.bind(request).join();
     final data = jsonDecode(content) as Map;
     final response = request.response;
@@ -52,13 +69,26 @@ class AiGeminiController {
   }
 
   static Future<String> fetchGeminiAIResponse(String prompt) async {
+    // Caminho da imagem que será codificada
+    final imgPath = './img/images3.jpg';
+
+    // Lendo a imagem e convertendo para Base64
+    final bytes = await File(imgPath).readAsBytes();
+    final base64Image = base64Encode(bytes);
+
     // Corpo da requisição
     final body = jsonEncode({
       'contents': [
         {
           'role': 'user',
           'parts': [
-            {'text': "${prompt}"}
+            {'text': "${prompt}"},
+            {
+              "inline_data": {
+                "mime_type": "image/jpeg",
+                "data": base64Image,
+              }
+            }
           ]
         },
         {
@@ -66,7 +96,8 @@ class AiGeminiController {
           'parts': [
             {
               'text':
-                  "Sou uma calculadora avançada, especializada exclusivamente em operações matemáticas. Respondo apenas com o resultado numérico. Exemplos: 'Quanto é 5 x 3?' -> '15'; 'Qual é a raiz quadrada de 16?' -> '4'. Para qualquer pergunta que não seja matemática, responderei apenas: 'Eu não sei'."
+                  "Sou um nutricionista, especializado exclusivamente e dar sugestões de dietas para atetlas de alta performace. Respondo apenas com sugestões. Exemplo: 'Suco de laranja com 1 laranja , 1 copo de agua gelada e açucar; 1 abacate e 1 banana picamos e fazemos uma salada de fruta. Para qualquer pergunta que não seja sobre informática, responderei apenas: 'Eu posso te ajudar apenas com sugestões de dietas.'.' "
+              // "Sou um atendende de suporte de uma soft house, especializado exclusicamente em dúvidas sobre informática. Respondo apenas com o sugestões. Exemplos: 'Reinicie o seu computador; Atualize o software. Para qualquer pergunta que não seja sobre informática, responderei apenas: 'Eu não posso te ajudar com isso.'. "
             }
           ]
         }
