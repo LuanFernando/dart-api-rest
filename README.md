@@ -19,12 +19,20 @@ As rotas devem ser cadastradas no service_route
 
 https://aistudio.google.com/app/apikey
 
+# Documentação do Gemini
+
+https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br&lang=rest
+
 # Exemplo de prompt:
 
 http://localhost:8888/api/ai/chat
 
 {
 "prompt" : "Qual o resultado da expressão: 100-32/2+1990"
+}
+
+{
+"prompt" : "o que posso fazer com os ites da imagem ??"
 }
 
 http://localhost:8888/api/ai/chat
